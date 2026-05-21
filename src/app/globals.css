@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-heading);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+  --color-base-100: var(--base-100);
+  --color-base-200: var(--base-200);
+  --color-base-300: var(--base-300);
+  --color-base-content: var(--base-content);
+  --color-primary-content: var(--primary-foreground);
+  --color-secondary-content: var(--secondary-foreground);
+  --color-neutral: var(--neutral);
+}
+
+:root {
+  /* Intrastack brand palette */
+  --base-100: #252C3D;
+  --base-200: #393F4F;
+  --base-300: #4B505F;
+  --base-content: #F8FAFC;
+  --neutral: #D1D5DB;
+
+  --background: var(--base-100);
+  --foreground: var(--base-content);
+  --card: var(--base-200);
+  --card-foreground: var(--base-content);
+  --popover: var(--base-200);
+  --popover-foreground: var(--base-content);
+  --primary: #00D1FF;
+  --primary-foreground: #001116;
+  --secondary: #FFC107;
+  --secondary-foreground: #1A1200;
+  --muted: var(--base-200);
+  --muted-foreground: #D1D5DB;
+  --accent: #1F2937;
+  --accent-foreground: var(--base-content);
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: var(--base-300);
+  --input: var(--base-300);
+  --ring: #00D1FF;
+  --chart-1: #FFC107;
+  --chart-2: #00D1FF;
+  --chart-3: oklch(0.666 0.179 58.318);
+  --chart-4: oklch(0.555 0.163 48.998);
+  --chart-5: oklch(0.473 0.137 46.201);
+  --radius: 0.625rem;
+  --sidebar: var(--base-200);
+  --sidebar-foreground: var(--base-content);
+  --sidebar-primary: #00D1FF;
+  --sidebar-primary-foreground: #001116;
+  --sidebar-accent: var(--base-300);
+  --sidebar-accent-foreground: var(--base-content);
+  --sidebar-border: var(--base-300);
+  --sidebar-ring: #00D1FF;
+}
+
+/* .dark variant intentionally mirrors :root — site is single-theme */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Motion                                                              */
+/* ------------------------------------------------------------------ */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-6px); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* Page-load fade-up for hero headings and lede paragraphs.
+     Anything with .anim-rise enters with a small upward fade. */
+  .anim-rise {
+    animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .anim-rise-delay-1 { animation-delay: 0.08s; }
+  .anim-rise-delay-2 { animation-delay: 0.16s; }
+  .anim-rise-delay-3 { animation-delay: 0.24s; }
+  .anim-rise-delay-4 { animation-delay: 0.32s; }
+
+  .anim-fade {
+    animation: fadeIn 0.8s ease-out both;
+  }
+
+  .anim-float {
+    animation: floatY 4s ease-in-out infinite;
+  }
+
+  /* Scroll-reveal — initial state hidden, .is-revealed flips it on. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Card hover lift — applied via .hover-lift utility. */
+  .hover-lift {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s ease,
+                border-color 0.2s ease;
+  }
+  .hover-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .anim-rise, .anim-fade, .anim-float { animation: none !important; }
+  .reveal { opacity: 1; transform: none; }
+}
