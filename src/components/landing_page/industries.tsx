@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 const INDUSTRIES = [
   { name: "Government", img: "/images/unsplash/photo-1541872703-74c5e44368f9-800.webp", href: "/industries/government", note: "Public sector" },
@@ -18,23 +19,31 @@ export default function Industries() {
     <section className="w-full bg-[#FBF8EE] py-28 md:py-32 px-6" id="industries">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-20 items-end">
-          <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
-            Eight sectors,
-            <br />
-            one <span className="italic font-serif text-[#0E7490]">playbook.</span>
-          </h2>
-          <p className="text-lg text-[#5C6473] leading-relaxed">
-            From regulated public sector to high-velocity telecom — we ship in the environments
-            where downtime isn&apos;t an option and compliance isn&apos;t optional.
-          </p>
+          <Reveal direction="down">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
+              Eight sectors,
+              <br />
+              one <span className="italic font-serif text-[#0E7490]">playbook.</span>
+            </h2>
+          </Reveal>
+          <Reveal direction="up" delay={150}>
+            <p className="text-lg text-[#5C6473] leading-relaxed">
+              From regulated public sector to high-velocity telecom — we ship in the environments
+              where downtime isn&apos;t an option and compliance isn&apos;t optional.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <RevealGroup
+          direction="scale"
+          stagger={90}
+          className="grid grid-cols-2 lg:grid-cols-4 gap-6"
+        >
           {INDUSTRIES.map((ind) => (
             <Link
               key={ind.name}
               href={ind.href}
-              className="group relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#E2E6EE] hover:shadow-lg transition-shadow"
+              className="group block relative aspect-[3/4] rounded-2xl overflow-hidden border border-[#E2E6EE] hover:shadow-lg transition-shadow"
             >
               <Image
                 src={ind.img}
@@ -58,7 +67,7 @@ export default function Industries() {
               </div>
             </Link>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

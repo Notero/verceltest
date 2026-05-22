@@ -9,21 +9,22 @@ import TechStack from "@/components/landing_page/techStack";
 import Testimonial from "@/components/landing_page/testimonial";
 import News from "@/components/landing_page/news";
 import CTA from "@/components/landing_page/cta";
+import Reveal from "@/components/public/reveal";
 
 export default function Home() {
   return (
     <main className="flex flex-col flex-1">
-      <HeroCarousel />
-      <ContractsStrip />
-      <About />
-      <Services />
-      <Solutions />
-      <Expertise />
-      <Industries />
-      <TechStack />
-      <Testimonial />
-      <News />
-      <CTA />
+      <Reveal direction="fade"><HeroCarousel /></Reveal>
+      <Reveal direction="fade"><ContractsStrip /></Reveal>
+      <Reveal direction="up"><About /></Reveal>
+      <Reveal direction="up"><Services /></Reveal>
+      <Reveal direction="left"><Solutions /></Reveal>
+      <Reveal direction="up"><Expertise /></Reveal>
+      <Reveal direction="right"><Industries /></Reveal>
+      <Reveal direction="scale"><TechStack /></Reveal>
+      <Reveal direction="up"><Testimonial /></Reveal>
+      <Reveal direction="up"><News /></Reveal>
+      <Reveal direction="fade"><CTA /></Reveal>
     </main>
   );
 }

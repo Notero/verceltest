@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight, Mail, MapPin, User, Globe2 } from "lucide-react";
 import SchemaScript from "@/components/seo/SchemaScript";
 import { breadcrumbSchema } from "@/lib/seo/schemas";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 export const metadata = {
   title: "Delivery Centers · Intrastack",
@@ -82,30 +83,38 @@ export default function DeliveryCentersPage() {
         <div aria-hidden className="pointer-events-none absolute -top-40 -right-32 size-[520px] rounded-full bg-primary/15 blur-3xl" />
         <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-32 size-[520px] rounded-full bg-secondary/10 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32">
-          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            <Link href="/" className="hover:text-primary">Home</Link>
-            <ChevronRight className="inline size-3 mx-1" />
-            <Link href="/about" className="hover:text-primary">About</Link>
-            <ChevronRight className="inline size-3 mx-1" />
-            <span className="text-primary">Delivery Centers</span>
-          </div>
-          <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
-            <Globe2 className="size-3.5" strokeWidth={2} />
-            Three delivery centers · one HQ
-          </span>
-          <h1 className="mt-5 max-w-4xl text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
-            Our delivery <span className="italic font-serif text-secondary">centers.</span>
-          </h1>
-          <p className="mt-7 max-w-3xl text-lg text-muted-foreground leading-relaxed">
-            Senior engineers and consultants working across the United States, Vietnam, Japan, and India.
-            Follow-the-sun delivery — so progress doesn&apos;t stop when your business day does.
-          </p>
+          <Reveal direction="down">
+            <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <Link href="/" className="hover:text-primary">Home</Link>
+              <ChevronRight className="inline size-3 mx-1" />
+              <Link href="/about" className="hover:text-primary">About</Link>
+              <ChevronRight className="inline size-3 mx-1" />
+              <span className="text-primary">Delivery Centers</span>
+            </div>
+          </Reveal>
+          <Reveal direction="scale" delay={120}>
+            <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+              <Globe2 className="size-3.5" strokeWidth={2} />
+              Three delivery centers · one HQ
+            </span>
+          </Reveal>
+          <Reveal direction="left" delay={240}>
+            <h1 className="mt-5 max-w-4xl text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
+              Our delivery <span className="italic font-serif text-secondary">centers.</span>
+            </h1>
+          </Reveal>
+          <Reveal direction="up" delay={380}>
+            <p className="mt-7 max-w-3xl text-lg text-muted-foreground leading-relaxed">
+              Senior engineers and consultants working across the United States, Vietnam, Japan, and India.
+              Follow-the-sun delivery — so progress doesn&apos;t stop when your business day does.
+            </p>
+          </Reveal>
         </div>
       </section>
 
       {/* STATS STRIP */}
       <section className="w-full bg-accent py-16 px-6 border-b border-base-300">
-        <div className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:text-left">
+        <RevealGroup direction="scale" stagger={100} className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-4 gap-8 text-center lg:text-left">
           <div>
             <div className="text-4xl md:text-5xl font-bold tracking-tight">
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">3 + HQ</span>
@@ -130,23 +139,27 @@ export default function DeliveryCentersPage() {
             </div>
             <div className="mt-2 text-sm text-muted-foreground">Engineers & consultants</div>
           </div>
-        </div>
+        </RevealGroup>
       </section>
 
       {/* CENTERS */}
       <section className="w-full bg-[#FBF8EE] py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
-              Where we <span className="italic font-serif text-[#0E7490]">work from.</span>
-            </h2>
-            <p className="text-lg text-[#5C6473] leading-relaxed">
-              Each center is led by a senior operator embedded in the region — close to clients, close to
-              talent, close to the cultural realities that shape good delivery.
-            </p>
+            <Reveal direction="right">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
+                Where we <span className="italic font-serif text-[#0E7490]">work from.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="left" delay={150}>
+              <p className="text-lg text-[#5C6473] leading-relaxed">
+                Each center is led by a senior operator embedded in the region — close to clients, close to
+                talent, close to the cultural realities that shape good delivery.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <RevealGroup direction="up" stagger={120} className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {CENTERS.map((c) => (
               <article
                 key={c.country}
@@ -211,7 +224,7 @@ export default function DeliveryCentersPage() {
                 </div>
               </article>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -220,31 +233,34 @@ export default function DeliveryCentersPage() {
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             <div>
-              <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-                Follow-the-sun
-              </span>
-              <h2 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-tight">
-                One day-clock, <span className="italic font-serif text-secondary">four time zones.</span>
-              </h2>
+              <Reveal direction="down">
+                <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+                  Follow-the-sun
+                </span>
+              </Reveal>
+              <Reveal direction="left" delay={120}>
+                <h2 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                  One day-clock, <span className="italic font-serif text-secondary">four time zones.</span>
+                </h2>
+              </Reveal>
               <p className="sr-only">Three delivery centers in Vietnam, Japan, and India hand work to the Las Vegas HQ.</p>
-              <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-                The work moves with the sun. India hands off to Vietnam, Vietnam to Japan, Japan to the
-                United States — same context, clean handoffs, no day-shift bottleneck. Critical engagements
-                get a 24/7 on-call rotation by design.
-              </p>
+              <Reveal direction="up" delay={260}>
+                <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+                  The work moves with the sun. India hands off to Vietnam, Vietnam to Japan, Japan to the
+                  United States — same context, clean handoffs, no day-shift bottleneck. Critical engagements
+                  get a 24/7 on-call rotation by design.
+                </p>
+              </Reveal>
               <div className="mt-8 flex flex-wrap gap-2">
-                {["India · Bengaluru", "Vietnam · HCMC", "Japan · Tokyo", "United States · Las Vegas"].map((s) => (
-                  <span
-                    key={s}
-                    className="inline-flex items-center rounded-full border border-base-300 bg-base-200/60 px-3 py-1 text-xs font-medium text-foreground"
-                  >
+                {["India · Bengaluru", "Vietnam · HCMC", "Japan · Tokyo", "United States · Las Vegas"].map((s, i) => (
+                  <Reveal as="span" key={s} direction="scale" delay={380 + i * 60} className="inline-flex items-center rounded-full border border-base-300 bg-base-200/60 px-3 py-1 text-xs font-medium text-foreground">
                     {s}
-                  </span>
+                  </Reveal>
                 ))}
               </div>
             </div>
 
-            <div className="rounded-3xl border border-base-300 bg-card/80 p-8">
+            <Reveal direction="right" delay={200} className="rounded-3xl border border-base-300 bg-card/80 p-8">
               <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-6">
                 ↓ Coverage clock
               </div>
@@ -273,7 +289,7 @@ export default function DeliveryCentersPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -281,20 +297,24 @@ export default function DeliveryCentersPage() {
       {/* FINAL CTA */}
       <section className="w-full bg-background py-24 px-6">
         <div className="mx-auto max-w-7xl rounded-3xl border border-base-300 bg-gradient-to-br from-base-200 to-base-100 p-10 md:p-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div>
-            <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-              Need a team in your <span className="italic font-serif text-secondary">time zone?</span>
-            </h3>
-            <p className="mt-3 text-muted-foreground">
-              Email the regional lead directly, or reach the whole team in one click.
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30 shrink-0"
-          >
-            Get in touch <ArrowRight className="size-4" />
-          </Link>
+          <Reveal direction="left">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                Need a team in your <span className="italic font-serif text-secondary">time zone?</span>
+              </h3>
+              <p className="mt-3 text-muted-foreground">
+                Email the regional lead directly, or reach the whole team in one click.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal direction="right" delay={150} className="shrink-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30"
+            >
+              Get in touch <ArrowRight className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>

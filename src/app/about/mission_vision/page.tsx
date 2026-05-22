@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight, Target, Compass, Sparkles, ShieldCheck, Globe2, Handshake } from "lucide-react";
 import SchemaScript from "@/components/seo/SchemaScript";
 import { breadcrumbSchema } from "@/lib/seo/schemas";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 export const metadata = {
   title: "Mission & Vision · Intrastack",
@@ -49,20 +50,26 @@ export default function MissionVisionPage() {
         <div aria-hidden className="pointer-events-none absolute -top-40 -left-32 size-[520px] rounded-full bg-primary/15 blur-3xl" />
         <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 size-[520px] rounded-full bg-secondary/10 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32">
-          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            <Link href="/" className="hover:text-primary">Home</Link>
-            <ChevronRight className="inline size-3 mx-1" />
-            <Link href="/about" className="hover:text-primary">About</Link>
-            <ChevronRight className="inline size-3 mx-1" />
-            <span className="text-primary">Mission & Vision</span>
-          </div>
-          <h1 className="mt-6 max-w-4xl text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
-            What we&apos;re here <span className="italic font-serif text-secondary">to do.</span>
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-            The mission that drives the work, and the vision we&apos;re building toward — the two sentences
-            every engagement at Intrastack has to live up to.
-          </p>
+          <Reveal direction="down">
+            <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <Link href="/" className="hover:text-primary">Home</Link>
+              <ChevronRight className="inline size-3 mx-1" />
+              <Link href="/about" className="hover:text-primary">About</Link>
+              <ChevronRight className="inline size-3 mx-1" />
+              <span className="text-primary">Mission & Vision</span>
+            </div>
+          </Reveal>
+          <Reveal direction="right" delay={120}>
+            <h1 className="mt-6 max-w-4xl text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
+              What we&apos;re here <span className="italic font-serif text-secondary">to do.</span>
+            </h1>
+          </Reveal>
+          <Reveal direction="up" delay={260}>
+            <p className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed">
+              The mission that drives the work, and the vision we&apos;re building toward — the two sentences
+              every engagement at Intrastack has to live up to.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -70,7 +77,7 @@ export default function MissionVisionPage() {
       <section className="w-full bg-[#FBF8EE] py-28 px-6">
         <div className="mx-auto max-w-7xl grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Mission */}
-          <article className="relative rounded-3xl border border-[#E2E6EE] bg-white p-10 md:p-12 overflow-hidden">
+          <Reveal as="article" direction="left" className="relative rounded-3xl border border-[#E2E6EE] bg-white p-10 md:p-12 overflow-hidden">
             <div aria-hidden className="absolute -top-20 -right-20 size-72 rounded-full bg-primary/10 blur-3xl" />
             <div className="relative">
               <div className="grid place-items-center size-14 rounded-2xl bg-primary/15 text-primary">
@@ -94,10 +101,10 @@ export default function MissionVisionPage() {
                 edge for the businesses we serve.
               </p>
             </div>
-          </article>
+          </Reveal>
 
           {/* Vision */}
-          <article className="relative rounded-3xl border border-[#E2E6EE] bg-[#0F1622] text-white p-10 md:p-12 overflow-hidden">
+          <Reveal as="article" direction="right" delay={150} className="relative rounded-3xl border border-[#E2E6EE] bg-[#0F1622] text-white p-10 md:p-12 overflow-hidden">
             <div aria-hidden className="absolute -top-20 -left-20 size-72 rounded-full bg-secondary/20 blur-3xl" />
             <div className="relative">
               <div className="grid place-items-center size-14 rounded-2xl bg-secondary/20 text-secondary">
@@ -120,7 +127,7 @@ export default function MissionVisionPage() {
                 close for the long run.
               </p>
             </div>
-          </article>
+          </Reveal>
         </div>
       </section>
 
@@ -128,16 +135,20 @@ export default function MissionVisionPage() {
       <section className="w-full bg-background py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              The values that <span className="italic font-serif text-secondary">back it up.</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              A mission and vision are only worth what the team behind them does on a Tuesday afternoon.
-              These are the four we measure ourselves on.
-            </p>
+            <Reveal direction="left">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                The values that <span className="italic font-serif text-secondary">back it up.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="right" delay={150}>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                A mission and vision are only worth what the team behind them does on a Tuesday afternoon.
+                These are the four we measure ourselves on.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <RevealGroup direction="scale" stagger={90} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map(({ icon: Icon, title, body }) => (
               <div
                 key={title}
@@ -150,13 +161,13 @@ export default function MissionVisionPage() {
                 <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{body}</p>
               </div>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* COMMITMENT QUOTE */}
       <section className="w-full bg-accent py-28 px-6 border-y border-base-300">
-        <div className="mx-auto max-w-5xl text-center">
+        <Reveal direction="scale" className="mx-auto max-w-5xl text-center">
           <span className="text-xs font-semibold uppercase tracking-widest text-primary">Our commitment</span>
           <p className="mt-6 text-3xl md:text-4xl font-bold text-foreground leading-snug">
             Excellence, innovation, and{" "}
@@ -168,26 +179,30 @@ export default function MissionVisionPage() {
             who would treat it as engineering, not theatre. That conviction shapes how we hire, how we
             architect, and how we hand over.
           </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* FINAL CTA */}
       <section className="w-full bg-background py-24 px-6">
         <div className="mx-auto max-w-7xl rounded-3xl border border-base-300 bg-gradient-to-br from-base-200 to-base-100 p-10 md:p-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div>
-            <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-              Build with a team that <span className="italic font-serif text-secondary">means it.</span>
-            </h3>
-            <p className="mt-3 text-muted-foreground">
-              A 30-min call with someone who&apos;s done this before — no SDRs, no decks.
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30 shrink-0"
-          >
-            Partner with us <ArrowRight className="size-4" />
-          </Link>
+          <Reveal direction="left">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                Build with a team that <span className="italic font-serif text-secondary">means it.</span>
+              </h3>
+              <p className="mt-3 text-muted-foreground">
+                A 30-min call with someone who&apos;s done this before — no SDRs, no decks.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal direction="right" delay={150} className="shrink-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30"
+            >
+              Partner with us <ArrowRight className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>

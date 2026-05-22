@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 type IconKind = "ai" | "cloud" | "data" | "pm" | "people" | "transform" | "devops" | "hw" | "shield" | "code" | "mobile" | "migrate";
 
@@ -132,16 +133,24 @@ export default function Services() {
     <section className="w-full bg-accent py-28 md:py-32 px-6" id="services">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-20 items-end">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-            What we <span className="italic font-serif text-secondary">provide.</span>
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            We specialize in cloud strategies, security, project management, data analytics, and
-            IT staffing solutions to empower businesses in your cloud journey.
-          </p>
+          <Reveal direction="left">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+              What we <span className="italic font-serif text-secondary">provide.</span>
+            </h2>
+          </Reveal>
+          <Reveal direction="right" delay={150}>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              We specialize in cloud strategies, security, project management, data analytics, and
+              IT staffing solutions to empower businesses in your cloud journey.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
+        <RevealGroup
+          direction="up"
+          stagger={80}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6"
+        >
           {SERVICES.map((s) => (
             <Link
               key={s.num}
@@ -158,7 +167,7 @@ export default function Services() {
               </span>
             </Link>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight } from "lucide-react";
 import SchemaScript from "@/components/seo/SchemaScript";
 import { breadcrumbSchema, serviceSchema } from "@/lib/seo/schemas";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 export type IndustryContent = {
   slug: string;
@@ -65,42 +66,47 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
           </div>
 
           <div className="flex flex-col justify-center px-6 lg:px-14 py-16 lg:py-20">
-            <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-              Industries · {c.name}
-            </span>
-            <h1 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-[1.08] tracking-tight">
-              {c.headline.lead}{" "}
-              <span className="italic font-serif text-secondary">{c.headline.emph}</span>{" "}
-              {c.headline.tail}
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
+            <Reveal direction="down">
+              <span className="text-xs font-semibold uppercase tracking-widest text-primary">
+                Industries · {c.name}
+              </span>
+            </Reveal>
+            <Reveal direction="right" delay={120}>
+              <h1 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-[1.08] tracking-tight">
+                {c.headline.lead}{" "}
+                <span className="italic font-serif text-secondary">{c.headline.emph}</span>{" "}
+                {c.headline.tail}
+              </h1>
+            </Reveal>
+            <Reveal direction="up" delay={260}>
+              <p className="mt-6 text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
+            </Reveal>
 
             <div className="mt-7 flex flex-wrap gap-2">
-              {c.pills.map((p) => (
-                <span
-                  key={p}
-                  className="inline-flex items-center gap-2 rounded-full border border-base-300 bg-base-200/70 px-3 py-1 text-xs font-medium text-foreground"
-                >
+              {c.pills.map((p, i) => (
+                <Reveal as="span" key={p} direction="scale" delay={350 + i * 50} className="inline-flex items-center gap-2 rounded-full border border-base-300 bg-base-200/70 px-3 py-1 text-xs font-medium text-foreground">
                   <span className="size-1.5 rounded-full bg-primary" />
                   {p}
-                </span>
+                </Reveal>
               ))}
             </div>
 
-            <div className="mt-9 flex flex-wrap gap-3">
-              <Link
-                href="/contact"
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
-              >
-                Book a discovery call <ArrowRight className="size-4" />
-              </Link>
-              <Link
-                href="/news/client_stories"
-                className="inline-flex items-center gap-2 rounded-lg border border-base-300 bg-base-100/50 px-5 py-3 text-sm font-semibold text-foreground hover:border-primary hover:text-primary transition-colors"
-              >
-                See case study
-              </Link>
-            </div>
+            <Reveal direction="up" delay={500}>
+              <div className="mt-9 flex flex-wrap gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+                >
+                  Book a discovery call <ArrowRight className="size-4" />
+                </Link>
+                <Link
+                  href="/news/client_stories"
+                  className="inline-flex items-center gap-2 rounded-lg border border-base-300 bg-base-100/50 px-5 py-3 text-sm font-semibold text-foreground hover:border-primary hover:text-primary transition-colors"
+                >
+                  See case study
+                </Link>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -108,7 +114,7 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
       {/* STATS strip — only rendered if stats are provided */}
       {c.stats && c.stats.length > 0 && (
       <section className="w-full bg-accent py-14 px-6 border-b border-base-300">
-        <div className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <RevealGroup direction="up" stagger={100} className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-4 gap-8">
           {c.stats.map((s) => (
             <div key={s.label}>
               <div className="text-4xl md:text-5xl font-bold text-foreground tracking-tight">
@@ -119,7 +125,7 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
               <div className="mt-2 text-sm text-muted-foreground">{s.label}</div>
             </div>
           ))}
-        </div>
+        </RevealGroup>
       </section>
       )}
 
@@ -127,15 +133,19 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
       <section className="w-full bg-[#FBF8EE] py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
-              What&apos;s <span className="italic font-serif text-[#0E7490]">hard</span> here.
-            </h2>
-            <p className="text-lg text-[#5C6473] leading-relaxed">
-              Three challenges teams in {c.noun} keep telling us about — and what we do about them.
-            </p>
+            <Reveal direction="left">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
+                What&apos;s <span className="italic font-serif text-[#0E7490]">hard</span> here.
+              </h2>
+            </Reveal>
+            <Reveal direction="right" delay={150}>
+              <p className="text-lg text-[#5C6473] leading-relaxed">
+                Three challenges teams in {c.noun} keep telling us about — and what we do about them.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <RevealGroup direction="up" stagger={100} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {c.challenges.map((ch) => (
               <div
                 key={ch.title}
@@ -148,7 +158,7 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
                 <p className="mt-3 text-sm text-[#5C6473] leading-relaxed">{ch.body}</p>
               </div>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -156,21 +166,22 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
       <section className="w-full bg-background py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              How we <span className="italic font-serif text-secondary">play it.</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Our standard motion, tuned to the realities of {c.noun}.
-            </p>
+            <Reveal direction="right">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                How we <span className="italic font-serif text-secondary">play it.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="left" delay={150}>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Our standard motion, tuned to the realities of {c.noun}.
+              </p>
+            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-10">
             <ol className="space-y-4">
               {c.approach.map((step, i) => (
-                <li
-                  key={step.title}
-                  className="flex gap-5 rounded-2xl border border-base-300 bg-base-200/60 p-6 hover:border-primary/50 transition-colors"
-                >
+                <Reveal as="li" key={step.title} direction="left" delay={i * 100} className="flex gap-5 rounded-2xl border border-base-300 bg-base-200/60 p-6 hover:border-primary/50 transition-colors">
                   <span className="grid place-items-center size-10 shrink-0 rounded-lg bg-primary/15 text-primary font-bold">
                     {i + 1}
                   </span>
@@ -178,10 +189,10 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
                     <h3 className="text-base font-bold text-foreground">{step.title}</h3>
                     <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{step.body}</p>
                   </div>
-                </li>
+                </Reveal>
               ))}
             </ol>
-            <div className="rounded-2xl border border-base-300 bg-card p-8 flex flex-col">
+            <Reveal direction="right" delay={150} className="rounded-2xl border border-base-300 bg-card p-8 flex flex-col">
               <span className="text-xs font-semibold uppercase tracking-widest text-primary">
                 Reference architecture
               </span>
@@ -197,7 +208,7 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
                   <text x="22" y="174" fontSize="12" fill="#00D1FF">observe · logs · metrics · cost</text>
                 </svg>
               </div>
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -206,42 +217,44 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
       {c.caseStudy && (
       <section className="w-full bg-accent py-28 px-6 border-y border-base-300">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12">
+          <Reveal direction="down" className="mb-12">
             <span className="text-xs font-semibold uppercase tracking-widest text-primary">
               Recent win
             </span>
             <h2 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-tight">
               One anchor <span className="italic font-serif text-secondary">case.</span>
             </h2>
-          </div>
+          </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-stretch">
-            <div className="relative aspect-[4/3] lg:aspect-auto rounded-2xl overflow-hidden border border-base-300">
+            <Reveal direction="left" className="relative aspect-[4/3] lg:aspect-auto rounded-2xl overflow-hidden border border-base-300">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={c.caseStudy.image}
                 alt={c.caseStudy.title}
                 className="absolute inset-0 size-full object-cover"
               />
-            </div>
+            </Reveal>
             <div className="flex flex-col">
-              <span className="text-xs font-semibold uppercase tracking-widest text-secondary">
-                {c.caseStudy.tag}
-              </span>
-              <h3 className="mt-4 text-2xl md:text-3xl font-bold text-foreground leading-snug">
-                {c.caseStudy.title}
-              </h3>
-              <blockquote className="mt-6 border-l-2 border-primary pl-5 text-lg text-muted-foreground italic">
-                “{c.caseStudy.quote}”
-              </blockquote>
-              <div className="mt-8 grid grid-cols-3 gap-4">
+              <Reveal direction="right">
+                <span className="text-xs font-semibold uppercase tracking-widest text-secondary">
+                  {c.caseStudy.tag}
+                </span>
+                <h3 className="mt-4 text-2xl md:text-3xl font-bold text-foreground leading-snug">
+                  {c.caseStudy.title}
+                </h3>
+                <blockquote className="mt-6 border-l-2 border-primary pl-5 text-lg text-muted-foreground italic">
+                  “{c.caseStudy.quote}”
+                </blockquote>
+              </Reveal>
+              <RevealGroup direction="scale" stagger={100} initialDelay={200} className="mt-8 grid grid-cols-3 gap-4">
                 {c.caseStudy.results.map((r) => (
                   <div key={r.label} className="rounded-xl border border-base-300 bg-base-100 p-5">
                     <div className="text-2xl font-bold text-primary">{r.value}</div>
                     <div className="mt-1 text-xs text-muted-foreground">{r.label}</div>
                   </div>
                 ))}
-              </div>
+              </RevealGroup>
             </div>
           </div>
         </div>
@@ -252,19 +265,23 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
       <section className="w-full bg-[#FBF8EE] py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
-              Goes well <span className="italic font-serif text-[#0E7490]">with.</span>
-            </h2>
-            <p className="text-lg text-[#5C6473] leading-relaxed">
-              Services and solutions most commonly paired with {c.name} engagements.
-            </p>
+            <Reveal direction="down">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
+                Goes well <span className="italic font-serif text-[#0E7490]">with.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="up" delay={150}>
+              <p className="text-lg text-[#5C6473] leading-relaxed">
+                Services and solutions most commonly paired with {c.name} engagements.
+              </p>
+            </Reveal>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <RevealGroup direction="scale" stagger={70} className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {c.related.map((r) => (
               <Link
                 key={r.href}
                 href={r.href}
-                className="group rounded-2xl border border-[#E2E6EE] bg-white p-6 hover:border-primary hover:shadow-md transition-all"
+                className="group block rounded-2xl border border-[#E2E6EE] bg-white p-6 hover:border-primary hover:shadow-md transition-all"
               >
                 <span className="text-xs font-semibold uppercase tracking-widest text-[#0E7490]">
                   {r.kind}
@@ -273,25 +290,29 @@ export default function IndustryPage({ c }: { c: IndustryContent }) {
                 <ArrowRight className="mt-5 size-4 text-[#5C6473] group-hover:text-primary group-hover:translate-x-1 transition-all" />
               </Link>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* FINAL CTA */}
       <section className="w-full bg-background py-24 px-6">
         <div className="mx-auto max-w-7xl rounded-3xl border border-base-300 bg-gradient-to-br from-base-200 to-base-100 p-10 md:p-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div>
-            <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-              Bring the <span className="italic font-serif text-secondary">{c.name}</span> playbook to your team.
-            </h3>
-            <p className="mt-3 text-muted-foreground">A 30-min call with someone who&apos;s done this before.</p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30 shrink-0"
-          >
-            Schedule discovery <ArrowRight className="size-4" />
-          </Link>
+          <Reveal direction="left">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                Bring the <span className="italic font-serif text-secondary">{c.name}</span> playbook to your team.
+              </h3>
+              <p className="mt-3 text-muted-foreground">A 30-min call with someone who&apos;s done this before.</p>
+            </div>
+          </Reveal>
+          <Reveal direction="right" delay={150} className="shrink-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30"
+            >
+              Schedule discovery <ArrowRight className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>

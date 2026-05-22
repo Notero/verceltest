@@ -68,27 +68,33 @@ export default function Page() {
           </div>
 
           <div className="flex flex-col justify-center px-6 lg:px-14 py-16 lg:py-20">
-            <h1 className="anim-rise text-4xl md:text-5xl font-bold text-foreground leading-[1.08] tracking-tight">
-              Build your future with{" "}
-              <span className="italic font-serif text-secondary">Intrastack</span>.
-            </h1>
-            <p className="anim-rise anim-rise-delay-1 mt-6 text-lg text-muted-foreground leading-relaxed">
-              Welcome to Intrastack Solutions — where innovation, collaboration, and passion converge
-              to shape the future of technology. If you&apos;re ready to embark on a journey that
-              values creativity, fosters growth, and propels you toward the forefront of
-              technological excellence, you&apos;ve come to the right place.
-            </p>
+            <Reveal direction="right">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-[1.08] tracking-tight">
+                Build your future with{" "}
+                <span className="italic font-serif text-secondary">Intrastack</span>.
+              </h1>
+            </Reveal>
+            <Reveal direction="up" delay={150}>
+              <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+                Welcome to Intrastack Solutions — where innovation, collaboration, and passion converge
+                to shape the future of technology. If you&apos;re ready to embark on a journey that
+                values creativity, fosters growth, and propels you toward the forefront of
+                technological excellence, you&apos;ve come to the right place.
+              </p>
+            </Reveal>
 
-            <div className="anim-rise anim-rise-delay-2 mt-8 flex flex-wrap gap-3">
-              <Button asChild>
-                <Link href="/careers">
-                  Explore open roles <ArrowRight className="size-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline">
-                <Link href="/contact">Talk to us</Link>
-              </Button>
-            </div>
+            <Reveal direction="up" delay={300}>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Button asChild>
+                  <Link href="/careers">
+                    Explore open roles <ArrowRight className="size-4" />
+                  </Link>
+                </Button>
+                <Button asChild variant="outline">
+                  <Link href="/contact">Talk to us</Link>
+                </Button>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -97,19 +103,24 @@ export default function Page() {
       <section className="w-full bg-accent py-24 md:py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              What you&apos;ll{" "}
-              <span className="italic font-serif text-secondary">find here.</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Four things we hold to, every release, every retrospective, every hire.
-            </p>
+            <Reveal direction="left">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                What you&apos;ll{" "}
+                <span className="italic font-serif text-secondary">find here.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="right" delay={150}>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Four things we hold to, every release, every retrospective, every hire.
+              </p>
+            </Reveal>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {VALUES.map((v, i) => (
               <Reveal
                 key={v.title}
+                direction="scale"
                 delay={i * 90}
                 className="hover-lift rounded-2xl border border-base-300 bg-base-100 p-8 flex flex-col"
               >
@@ -126,7 +137,7 @@ export default function Page() {
 
       {/* CTA */}
       <section className="w-full bg-background py-24 md:py-28 px-6 border-t border-base-300">
-        <div className="mx-auto max-w-4xl text-center">
+        <Reveal direction="scale" className="mx-auto max-w-4xl text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
             Don&apos;t see a must?
           </h2>
@@ -143,7 +154,7 @@ export default function Page() {
               <Link href="/contact">Contact us</Link>
             </Button>
           </div>
-        </div>
+        </Reveal>
       </section>
     </main>
   );

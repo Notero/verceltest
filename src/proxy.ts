@@ -18,7 +18,7 @@ export function proxy(request: NextRequest) {
   //   - Google Maps embed (contact page iframe)
   const csp = [
     `default-src 'self'`,
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""}`,
+    `script-src 'self'${isDev ? " 'unsafe-eval' 'unsafe-inline'" : " 'unsafe-inline'"}`,
     `style-src 'self' 'unsafe-inline'`,
     `img-src 'self' data: blob: https://cdn.simpleicons.org https://*.supabase.co`,
     `font-src 'self' data:`,

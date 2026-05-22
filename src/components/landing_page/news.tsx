@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { fetchLatestNews, type NewsItem, type NewsKind } from "@/lib/content/news";
 import { newsImageUrl } from "@/lib/supabase/storage";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 const KIND_HREF: Record<NewsKind, string> = {
   blog: "/news/blogs",
@@ -38,25 +39,31 @@ export default async function News() {
     <section className="w-full bg-accent py-28 md:py-32 px-6" id="news">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-20 items-end">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-            News &amp; <span className="italic font-serif text-secondary">updates.</span>
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed">
-            What we&apos;re shipping, who&apos;s joining, and where we&apos;re opening next.
-          </p>
+          <Reveal direction="right">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+              News &amp; <span className="italic font-serif text-secondary">updates.</span>
+            </h2>
+          </Reveal>
+          <Reveal direction="left" delay={150}>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              What we&apos;re shipping, who&apos;s joining, and where we&apos;re opening next.
+            </p>
+          </Reveal>
         </div>
 
         {items.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-base-300 bg-base-100/40 p-12 text-center">
-            <p className="text-base font-semibold text-foreground">
-              Fresh updates are on the way.
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Check back soon — or subscribe via our newsletter.
-            </p>
-          </div>
+          <Reveal direction="scale">
+            <div className="rounded-2xl border border-dashed border-base-300 bg-base-100/40 p-12 text-center">
+              <p className="text-base font-semibold text-foreground">
+                Fresh updates are on the way.
+              </p>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Check back soon — or subscribe via our newsletter.
+              </p>
+            </div>
+          </Reveal>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <RevealGroup direction="up" stagger={120} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {items.map((n) => {
               const cover = newsImageUrl(n.cover_image_path) ?? n.cover_image;
               return (
@@ -95,17 +102,19 @@ export default async function News() {
               </Link>
               );
             })}
-          </div>
+          </RevealGroup>
         )}
 
-        <div className="mt-12 flex justify-center">
-          <Link
-            href="/news/blogs"
-            className="inline-flex items-center gap-2 rounded-lg border border-base-300 px-5 py-3 text-sm font-semibold text-foreground hover:border-primary hover:text-primary transition-colors"
-          >
-            Read all updates <ArrowRight className="size-4" />
-          </Link>
-        </div>
+        <Reveal direction="up" delay={300}>
+          <div className="mt-12 flex justify-center">
+            <Link
+              href="/news/blogs"
+              className="inline-flex items-center gap-2 rounded-lg border border-base-300 px-5 py-3 text-sm font-semibold text-foreground hover:border-primary hover:text-primary transition-colors"
+            >
+              Read all updates <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </Reveal>
       </div>
     </section>
   );

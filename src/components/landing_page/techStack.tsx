@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Reveal from "@/components/public/reveal";
 
 type Tech = { name: string; slug?: string; domain?: string; url?: string };
 
@@ -78,16 +79,20 @@ export default function TechStack() {
     <section className="w-full bg-accent py-28 md:py-32 px-6" id="tech">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-20 items-end">
-          <div>
-            <h2 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              Our stack <span className="italic font-serif text-secondary">expertise.</span>
-            </h2>
-          </div>
-          <p className="text-muted-foreground leading-relaxed">
-            Deep practitioners in the platforms enterprises actually run — cloud providers,
-            container orchestration, security, observability, and the data infrastructure in
-            between.
-          </p>
+          <Reveal direction="right">
+            <div>
+              <h2 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                Our stack <span className="italic font-serif text-secondary">expertise.</span>
+              </h2>
+            </div>
+          </Reveal>
+          <Reveal direction="left" delay={150}>
+            <p className="text-muted-foreground leading-relaxed">
+              Deep practitioners in the platforms enterprises actually run — cloud providers,
+              container orchestration, security, observability, and the data infrastructure in
+              between.
+            </p>
+          </Reveal>
         </div>
 
         <div

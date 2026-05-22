@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, ChevronRight, Check, Star, Handshake } from "lucide-react";
 import SchemaScript from "@/components/seo/SchemaScript";
 import { breadcrumbSchema } from "@/lib/seo/schemas";
+import Reveal from "@/components/public/reveal";
 
 export const metadata = {
   title: "Partners · Intrastack",
@@ -89,25 +90,33 @@ export default function PartnersPage() {
         <div aria-hidden className="pointer-events-none absolute -top-40 -left-32 size-[520px] rounded-full bg-primary/15 blur-3xl" />
         <div aria-hidden className="pointer-events-none absolute -bottom-40 -right-32 size-[520px] rounded-full bg-secondary/10 blur-3xl" />
         <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32">
-          <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
-            <Link href="/" className="hover:text-primary">Home</Link>
-            <ChevronRight className="inline size-3 mx-1" />
-            <Link href="/about" className="hover:text-primary">About</Link>
-            <ChevronRight className="inline size-3 mx-1" />
-            <span className="text-primary">Partners</span>
-          </div>
-          <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
-            <Handshake className="size-3.5" strokeWidth={2} />
-            Pioneering excellence together
-          </span>
-          <h1 className="mt-5 max-w-4xl text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
-            Our trusted <span className="italic font-serif text-secondary">technology</span> partnerships.
-          </h1>
-          <p className="mt-7 max-w-3xl text-lg text-muted-foreground leading-relaxed">
-            At Intrastack Solutions, we believe in the power of collaboration and strategic alliances. Our
-            commitment to delivering cutting-edge solutions is fortified by strong partnerships with industry
-            leaders — driving innovation and excellence across the digital landscape.
-          </p>
+          <Reveal direction="down">
+            <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+              <Link href="/" className="hover:text-primary">Home</Link>
+              <ChevronRight className="inline size-3 mx-1" />
+              <Link href="/about" className="hover:text-primary">About</Link>
+              <ChevronRight className="inline size-3 mx-1" />
+              <span className="text-primary">Partners</span>
+            </div>
+          </Reveal>
+          <Reveal direction="scale" delay={120}>
+            <span className="mt-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-semibold uppercase tracking-widest text-primary">
+              <Handshake className="size-3.5" strokeWidth={2} />
+              Pioneering excellence together
+            </span>
+          </Reveal>
+          <Reveal direction="right" delay={240}>
+            <h1 className="mt-5 max-w-4xl text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
+              Our trusted <span className="italic font-serif text-secondary">technology</span> partnerships.
+            </h1>
+          </Reveal>
+          <Reveal direction="up" delay={380}>
+            <p className="mt-7 max-w-3xl text-lg text-muted-foreground leading-relaxed">
+              At Intrastack Solutions, we believe in the power of collaboration and strategic alliances. Our
+              commitment to delivering cutting-edge solutions is fortified by strong partnerships with industry
+              leaders — driving innovation and excellence across the digital landscape.
+            </p>
+          </Reveal>
         </div>
       </section>
 
@@ -115,8 +124,10 @@ export default function PartnersPage() {
       <section className="w-full bg-[#FBF8EE] py-28 px-6">
         <div className="mx-auto max-w-7xl space-y-10">
           {PARTNERS.map((p, i) => (
-            <article
+            <Reveal
+              as="article"
               key={p.name}
+              direction={i % 2 === 0 ? "left" : "right"}
               className="rounded-3xl border border-[#E2E6EE] bg-white overflow-hidden"
             >
               <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr]">
@@ -167,14 +178,14 @@ export default function PartnersPage() {
                   </ul>
                 </div>
               </div>
-            </article>
+            </Reveal>
           ))}
         </div>
       </section>
 
       {/* CLOSING STATEMENT */}
       <section className="w-full bg-accent py-28 px-6 border-y border-base-300">
-        <div className="mx-auto max-w-5xl text-center">
+        <Reveal direction="scale" className="mx-auto max-w-5xl text-center">
           <span className="text-xs font-semibold uppercase tracking-widest text-primary">
             Why these partnerships
           </span>
@@ -187,27 +198,31 @@ export default function PartnersPage() {
           <p className="mt-10 text-xl md:text-2xl italic font-serif text-secondary">
             &ldquo;Intrastack Solutions: Where Collaboration Drives Innovation, and Excellence is a Collective Pursuit.&rdquo;
           </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* FINAL CTA */}
       <section className="w-full bg-background py-24 px-6">
         <div className="mx-auto max-w-7xl rounded-3xl border border-base-300 bg-gradient-to-br from-base-200 to-base-100 p-10 md:p-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-              Want partner-grade <span className="italic font-serif text-secondary">access</span> on your next build?
-            </h2>
-            <p className="mt-3 text-muted-foreground">
-              We bring the relationships, the credits, and the escalation paths — your team brings the
-              problem.
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30 shrink-0"
-          >
-            Talk to us <ArrowRight className="size-4" />
-          </Link>
+          <Reveal direction="left">
+            <div>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                Want partner-grade <span className="italic font-serif text-secondary">access</span> on your next build?
+              </h2>
+              <p className="mt-3 text-muted-foreground">
+                We bring the relationships, the credits, and the escalation paths — your team brings the
+                problem.
+              </p>
+            </div>
+          </Reveal>
+          <Reveal direction="right" delay={150} className="shrink-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30"
+            >
+              Talk to us <ArrowRight className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>

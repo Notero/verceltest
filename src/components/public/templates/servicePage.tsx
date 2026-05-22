@@ -3,6 +3,7 @@ import { ArrowRight, ChevronRight, Check } from "lucide-react";
 import SchemaScript from "@/components/seo/SchemaScript";
 import { breadcrumbSchema, serviceSchema } from "@/lib/seo/schemas";
 import ReachUsForm from "@/components/public/reachUsForm";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 const SERVICE_TO_INTEREST: Record<string, string> = {
   ai_engineering: "AI & Machine Learning",
@@ -100,28 +101,30 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
       {/* NARRATIVE — tagline, intro, why-us pillars */}
       <section className="w-full bg-background py-24 px-6 border-b border-base-300">
         <div className="mx-auto max-w-7xl">
-          <div className="max-w-4xl">
+          <Reveal direction="up" className="max-w-4xl">
             <div className="text-xs font-semibold uppercase tracking-widest text-secondary">
               {c.narrative.tagline}
             </div>
             <p className="mt-5 text-xl md:text-2xl text-foreground/90 leading-relaxed font-serif">
               {c.narrative.intro}
             </p>
-          </div>
+          </Reveal>
 
           <div className="mt-20 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                {c.narrative.sectionTitle.split(" ").slice(0, -1).join(" ")}{" "}
-                <span className={`italic font-serif ${a.emph}`}>
-                  {c.narrative.sectionTitle.split(" ").slice(-1)}
-                </span>
-              </h2>
-              <p className="mt-5 text-base text-muted-foreground leading-relaxed">
-                {c.narrative.sectionLede}
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <Reveal direction="left">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                  {c.narrative.sectionTitle.split(" ").slice(0, -1).join(" ")}{" "}
+                  <span className={`italic font-serif ${a.emph}`}>
+                    {c.narrative.sectionTitle.split(" ").slice(-1)}
+                  </span>
+                </h2>
+                <p className="mt-5 text-base text-muted-foreground leading-relaxed">
+                  {c.narrative.sectionLede}
+                </p>
+              </div>
+            </Reveal>
+            <RevealGroup direction="scale" stagger={80} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {c.narrative.pillars.map((p) => (
                 <div
                   key={p.title}
@@ -131,13 +134,15 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.body}</p>
                 </div>
               ))}
-            </div>
+            </RevealGroup>
           </div>
 
           {c.narrative.closing && (
-            <p className="mt-16 max-w-4xl text-lg text-muted-foreground leading-relaxed italic">
-              {c.narrative.closing}
-            </p>
+            <Reveal direction="fade">
+              <p className="mt-16 max-w-4xl text-lg text-muted-foreground leading-relaxed italic">
+                {c.narrative.closing}
+              </p>
+            </Reveal>
           )}
         </div>
       </section>
@@ -146,15 +151,19 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
       <section className="w-full bg-[#FBF8EE] py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
-              What you <span className="italic font-serif text-[#0E7490]">walk away with.</span>
-            </h2>
-            <p className="text-lg text-[#5C6473] leading-relaxed">
-              Concrete deliverables — everything is yours at the end of the engagement.
-            </p>
+            <Reveal direction="right">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
+                What you <span className="italic font-serif text-[#0E7490]">walk away with.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="left" delay={150}>
+              <p className="text-lg text-[#5C6473] leading-relaxed">
+                Concrete deliverables — everything is yours at the end of the engagement.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <RevealGroup direction="up" stagger={70} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             {c.deliverables.map((d) => (
               <div
                 key={d.title}
@@ -167,7 +176,7 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
                 <p className="mt-3 text-sm text-[#5C6473] leading-relaxed">{d.body}</p>
               </div>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -175,14 +184,18 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
       <section className="w-full bg-background py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              {ph.lead}{" "}
-              <span className={`italic font-serif ${a.emph}`}>{ph.emph}</span>
-              {ph.tail ? ` ${ph.tail}` : ""}
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Same shape every engagement — tuned to your team, stack, and stakes.
-            </p>
+            <Reveal direction="left">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                {ph.lead}{" "}
+                <span className={`italic font-serif ${a.emph}`}>{ph.emph}</span>
+                {ph.tail ? ` ${ph.tail}` : ""}
+              </h2>
+            </Reveal>
+            <Reveal direction="right" delay={150}>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Same shape every engagement — tuned to your team, stack, and stakes.
+              </p>
+            </Reveal>
           </div>
 
           <div className="relative">
@@ -190,7 +203,7 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
               aria-hidden
               className="hidden lg:block absolute left-0 right-0 top-12 h-px bg-gradient-to-r from-primary/0 via-primary/40 to-primary/0"
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
+            <RevealGroup direction="up" stagger={80} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-5">
               {c.process.map((p, i) => (
                 <div
                   key={p.title}
@@ -206,7 +219,7 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
                   <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.body}</p>
                 </div>
               ))}
-            </div>
+            </RevealGroup>
           </div>
         </div>
       </section>
@@ -215,15 +228,19 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
       <section className="w-full bg-accent py-28 px-6 border-y border-base-300">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              Three ways to <span className={`italic font-serif ${a.emph}`}>engage.</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              Same outcome — pick the shape that fits your team and timeline.
-            </p>
+            <Reveal direction="down">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                Three ways to <span className={`italic font-serif ${a.emph}`}>engage.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="up" delay={150}>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                Same outcome — pick the shape that fits your team and timeline.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <RevealGroup direction="scale" stagger={120} className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {c.tiers.map((t) => (
               <div
                 key={t.name}
@@ -263,26 +280,28 @@ export default function ServicePage({ c }: { c: ServiceContent }) {
                 </Link>
               </div>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
       {/* CONTACT CTA */}
       <section className="w-full bg-background py-24 px-6">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl">
+          <Reveal direction="left" className="mb-10 max-w-2xl">
             <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
               Tell us what&apos;s <span className={`italic font-serif ${a.emph}`}>on fire.</span>
             </h3>
             <p className="mt-3 text-muted-foreground">
               Drop a line — a senior engineer replies the same business day. No SDRs, no decks.
             </p>
-          </div>
-          <ReachUsForm
-            title={`Talk to us about ${c.name}.`}
-            subtitle="A senior engineer replies the same business day."
-            defaultInterest={SERVICE_TO_INTEREST[c.slug]}
-          />
+          </Reveal>
+          <Reveal direction="up" delay={150}>
+            <ReachUsForm
+              title={`Talk to us about ${c.name}.`}
+              subtitle="A senior engineer replies the same business day."
+              defaultInterest={SERVICE_TO_INTEREST[c.slug]}
+            />
+          </Reveal>
         </div>
       </section>
     </main>
@@ -345,22 +364,26 @@ function HeroSplit({ c }: { c: ServiceContent }) {
     <section className="w-full bg-background border-b border-base-300">
       <div className="mx-auto grid max-w-7xl grid-cols-1 lg:grid-cols-[1.1fr_1fr]">
         <div className="px-6 lg:pl-2 lg:pr-14 py-16 lg:py-24 flex flex-col justify-center">
-          <Crumbs name={c.name} />
-          <h1 className="mt-5 text-4xl md:text-6xl font-bold text-foreground leading-[1.04] tracking-tight">
-            {c.headline.lead}{" "}
-            <span className={`italic font-serif ${a.emph}`}>{c.headline.emph}</span>{" "}
-            {c.headline.tail}
-          </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
-          <PillRow c={c} />
-          <HeroCTAs />
+          <Reveal direction="down"><Crumbs name={c.name} /></Reveal>
+          <Reveal direction="left" delay={120}>
+            <h1 className="mt-5 text-4xl md:text-6xl font-bold text-foreground leading-[1.04] tracking-tight">
+              {c.headline.lead}{" "}
+              <span className={`italic font-serif ${a.emph}`}>{c.headline.emph}</span>{" "}
+              {c.headline.tail}
+            </h1>
+          </Reveal>
+          <Reveal direction="up" delay={260}>
+            <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
+          </Reveal>
+          <Reveal direction="fade" delay={400}><PillRow c={c} /></Reveal>
+          <Reveal direction="up" delay={520}><HeroCTAs /></Reveal>
         </div>
-        <div className="relative min-h-[420px] lg:min-h-[600px] overflow-hidden">
+        <Reveal direction="right" delay={150} className="relative min-h-[420px] lg:min-h-[600px] overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={c.heroImage} alt={c.name} className="absolute inset-0 size-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/30 to-transparent" />
           <div className={`absolute -inset-y-12 -right-12 w-1/2 ${a.glow} blur-3xl opacity-60 pointer-events-none`} />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -379,15 +402,19 @@ function HeroOverlay({ c }: { c: ServiceContent }) {
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 items-center">
         <div>
-          <Crumbs name={c.name} />
-          <h1 className="mt-5 text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
-            {c.headline.lead}{" "}
-            <span className={`italic font-serif ${a.emph}`}>{c.headline.emph}</span>{" "}
-            {c.headline.tail}
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
-          <PillRow c={c} />
-          <HeroCTAs />
+          <Reveal direction="down"><Crumbs name={c.name} /></Reveal>
+          <Reveal direction="scale" delay={120}>
+            <h1 className="mt-5 text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
+              {c.headline.lead}{" "}
+              <span className={`italic font-serif ${a.emph}`}>{c.headline.emph}</span>{" "}
+              {c.headline.tail}
+            </h1>
+          </Reveal>
+          <Reveal direction="right" delay={280}>
+            <p className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
+          </Reveal>
+          <Reveal direction="fade" delay={420}><PillRow c={c} /></Reveal>
+          <Reveal direction="up" delay={540}><HeroCTAs /></Reveal>
         </div>
       </div>
     </section>
@@ -409,17 +436,21 @@ function HeroClean({ c }: { c: ServiceContent }) {
       />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:py-28 grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-12 items-center">
         <div>
-          <Crumbs name={c.name} />
-          <h1 className="mt-6 text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
-            {c.headline.lead}{" "}
-            <span className={`italic font-serif ${a.emph}`}>{c.headline.emph}</span>{" "}
-            {c.headline.tail}
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
-          <PillRow c={c} />
-          <HeroCTAs />
+          <Reveal direction="down"><Crumbs name={c.name} /></Reveal>
+          <Reveal direction="right" delay={120}>
+            <h1 className="mt-6 text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
+              {c.headline.lead}{" "}
+              <span className={`italic font-serif ${a.emph}`}>{c.headline.emph}</span>{" "}
+              {c.headline.tail}
+            </h1>
+          </Reveal>
+          <Reveal direction="up" delay={280}>
+            <p className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
+          </Reveal>
+          <Reveal direction="fade" delay={420}><PillRow c={c} /></Reveal>
+          <Reveal direction="up" delay={540}><HeroCTAs /></Reveal>
         </div>
-        <div className="relative aspect-square w-full max-w-md mx-auto rounded-3xl border border-base-300 bg-card overflow-hidden">
+        <Reveal direction="scale" delay={200} className="relative aspect-square w-full max-w-md mx-auto rounded-3xl border border-base-300 bg-card overflow-hidden">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={c.heroImage} alt={c.name} className="absolute inset-0 size-full object-cover opacity-90" />
           <div className="absolute inset-0 bg-gradient-to-tr from-background/70 via-transparent to-transparent" />
@@ -427,7 +458,7 @@ function HeroClean({ c }: { c: ServiceContent }) {
             <span>{c.name}</span>
             <span className="text-primary">Intrastack</span>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

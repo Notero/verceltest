@@ -13,6 +13,7 @@ import {
   ArrowUpRight,
   LucideIcon,
 } from "lucide-react";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 type Solution = {
   title: string;
@@ -39,21 +40,29 @@ export default function Solutions() {
     <section className="w-full bg-[#FBF8EE] py-28 md:py-32 px-6" id="solutions">
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-20 items-end">
-          <div>
-            <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#0E7490]">
-              Solutions
-            </span>
-            <h2 className="mt-4 text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
-              Outcomes you can <span className="italic font-serif text-[#0E7490]">ship.</span>
-            </h2>
-          </div>
-          <p className="text-lg text-[#5C6473] leading-relaxed">
-            Ten focused solution areas — packaged engagements with clear deliverables, not
-            open-ended consulting hours.
-          </p>
+          <Reveal direction="down">
+            <div>
+              <span className="inline-block text-xs font-semibold uppercase tracking-widest text-[#0E7490]">
+                Solutions
+              </span>
+              <h2 className="mt-4 text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
+                Outcomes you can <span className="italic font-serif text-[#0E7490]">ship.</span>
+              </h2>
+            </div>
+          </Reveal>
+          <Reveal direction="left" delay={150}>
+            <p className="text-lg text-[#5C6473] leading-relaxed">
+              Ten focused solution areas — packaged engagements with clear deliverables, not
+              open-ended consulting hours.
+            </p>
+          </Reveal>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        <RevealGroup
+          direction="scale"
+          stagger={70}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4"
+        >
           {SOLUTIONS.map(({ title, body, href, icon: Icon }) => (
             <Link
               key={href}
@@ -78,7 +87,7 @@ export default function Solutions() {
               </div>
             </Link>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   );

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight, Check, ChevronRight, X } from "lucide-react";
 import SchemaScript from "@/components/seo/SchemaScript";
 import { breadcrumbSchema, serviceSchema } from "@/lib/seo/schemas";
+import Reveal, { RevealGroup } from "@/components/public/reveal";
 
 export type SolutionAccent = "cyan" | "yellow" | "mixed";
 export type SolutionHeroVariant = "diagram" | "split" | "overlay";
@@ -64,28 +65,30 @@ export default function SolutionPage({ c }: { c: SolutionContent }) {
       {/* NARRATIVE — tagline, intro, why-us pillars */}
       <section className="w-full bg-background py-24 px-6 border-b border-base-300">
         <div className="mx-auto max-w-7xl">
-          <div className="max-w-4xl">
+          <Reveal direction="up" className="max-w-4xl">
             <div className="text-xs font-semibold uppercase tracking-widest text-secondary">
               {c.narrative.tagline}
             </div>
             <p className="mt-5 text-xl md:text-2xl text-foreground/90 leading-relaxed font-serif">
               {c.narrative.intro}
             </p>
-          </div>
+          </Reveal>
 
           <div className="mt-20 grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-10 lg:gap-16">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-                {c.narrative.sectionTitle.split(" ").slice(0, -1).join(" ")}{" "}
-                <span className={`italic font-serif ${a.emph}`}>
-                  {c.narrative.sectionTitle.split(" ").slice(-1)}
-                </span>
-              </h2>
-              <p className="mt-5 text-base text-muted-foreground leading-relaxed">
-                {c.narrative.sectionLede}
-              </p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+            <Reveal direction="left">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                  {c.narrative.sectionTitle.split(" ").slice(0, -1).join(" ")}{" "}
+                  <span className={`italic font-serif ${a.emph}`}>
+                    {c.narrative.sectionTitle.split(" ").slice(-1)}
+                  </span>
+                </h2>
+                <p className="mt-5 text-base text-muted-foreground leading-relaxed">
+                  {c.narrative.sectionLede}
+                </p>
+              </div>
+            </Reveal>
+            <RevealGroup direction="up" stagger={80} className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               {c.narrative.pillars.map((p) => (
                 <div
                   key={p.title}
@@ -95,20 +98,22 @@ export default function SolutionPage({ c }: { c: SolutionContent }) {
                   <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.body}</p>
                 </div>
               ))}
-            </div>
+            </RevealGroup>
           </div>
 
           {c.narrative.closing && (
-            <p className="mt-16 max-w-4xl text-lg text-muted-foreground leading-relaxed italic">
-              {c.narrative.closing}
-            </p>
+            <Reveal direction="fade">
+              <p className="mt-16 max-w-4xl text-lg text-muted-foreground leading-relaxed italic">
+                {c.narrative.closing}
+              </p>
+            </Reveal>
           )}
         </div>
       </section>
 
       {/* WHY STRIP */}
       <section className="w-full bg-accent py-20 px-6 border-b border-base-300">
-        <div className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-4 gap-6">
+        <RevealGroup direction="scale" stagger={90} className="mx-auto max-w-7xl grid grid-cols-2 lg:grid-cols-4 gap-6">
           {c.why.map((w) => (
             <div key={w.title} className="rounded-2xl border border-base-300 bg-base-100 p-6">
               <div className="grid place-items-center size-10 rounded-lg bg-primary/15 text-primary text-xl font-bold">
@@ -118,22 +123,26 @@ export default function SolutionPage({ c }: { c: SolutionContent }) {
               <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{w.body}</p>
             </div>
           ))}
-        </div>
+        </RevealGroup>
       </section>
 
       {/* CAPABILITIES */}
       <section className="w-full bg-[#FBF8EE] py-28 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-16 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
-              What&apos;s in the <span className="italic font-serif text-[#0E7490]">box.</span>
-            </h2>
-            <p className="text-lg text-[#5C6473] leading-relaxed">
-              Capabilities included in the standard {c.name} rollout — modular, swappable.
-            </p>
+            <Reveal direction="right">
+              <h2 className="text-4xl md:text-5xl font-bold text-[#0F1622] leading-tight">
+                What&apos;s in the <span className="italic font-serif text-[#0E7490]">box.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="left" delay={150}>
+              <p className="text-lg text-[#5C6473] leading-relaxed">
+                Capabilities included in the standard {c.name} rollout — modular, swappable.
+              </p>
+            </Reveal>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          <RevealGroup direction="up" stagger={90} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {c.capabilities.map((cap, i) => (
               <div
                 key={cap.title}
@@ -153,7 +162,7 @@ export default function SolutionPage({ c }: { c: SolutionContent }) {
                 </ul>
               </div>
             ))}
-          </div>
+          </RevealGroup>
         </div>
       </section>
 
@@ -161,22 +170,23 @@ export default function SolutionPage({ c }: { c: SolutionContent }) {
       <section className="w-full bg-background py-24 px-6">
         <div className="mx-auto max-w-7xl">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 mb-12 items-end">
-            <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              Tools we <span className={`italic font-serif ${a.emph}`}>bring.</span>
-            </h2>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              An opinionated default stack — swap any of it for what your team already runs.
-            </p>
+            <Reveal direction="down">
+              <h2 className="text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                Tools we <span className={`italic font-serif ${a.emph}`}>bring.</span>
+              </h2>
+            </Reveal>
+            <Reveal direction="up" delay={150}>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                An opinionated default stack — swap any of it for what your team already runs.
+              </p>
+            </Reveal>
           </div>
           <div className="flex flex-wrap gap-3">
-            {c.stack.map((s) => (
-              <span
-                key={s}
-                className="inline-flex items-center gap-2 rounded-lg border border-base-300 bg-base-200/60 px-4 py-2 text-sm font-medium text-foreground"
-              >
+            {c.stack.map((s, i) => (
+              <Reveal as="span" key={s} direction="scale" delay={i * 40} className="inline-flex items-center gap-2 rounded-lg border border-base-300 bg-base-200/60 px-4 py-2 text-sm font-medium text-foreground">
                 <span className="size-2 rounded-sm bg-primary" />
                 {s}
-              </span>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -185,14 +195,14 @@ export default function SolutionPage({ c }: { c: SolutionContent }) {
       {/* COMPARE */}
       <section className="w-full bg-accent py-28 px-6 border-y border-base-300">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-12">
+          <Reveal direction="down" className="mb-12">
             <span className="text-xs font-semibold uppercase tracking-widest text-primary">vs. DIY</span>
             <h2 className="mt-4 text-4xl md:text-5xl font-bold text-foreground leading-tight">
               What you actually get on <span className={`italic font-serif ${a.emph}`}>day 90.</span>
             </h2>
-          </div>
+          </Reveal>
 
-          <div className="overflow-hidden rounded-2xl border border-base-300 bg-base-100">
+          <Reveal direction="up" delay={150} className="overflow-hidden rounded-2xl border border-base-300 bg-base-100">
             <div className="grid grid-cols-[1.4fr_1fr_1fr] bg-base-200 text-xs font-semibold uppercase tracking-widest text-muted-foreground">
               <div className="px-6 py-4">Capability</div>
               <div className="px-6 py-4 text-primary">With us</div>
@@ -214,33 +224,37 @@ export default function SolutionPage({ c }: { c: SolutionContent }) {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* FINAL CTA */}
       <section className="w-full bg-background py-24 px-6">
         <div className="mx-auto max-w-7xl rounded-3xl border border-base-300 bg-gradient-to-br from-base-200 to-base-100 p-10 md:p-14 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
-          <div>
-            <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
-              {c.variant === "diagram" ? (
-                <>Want the reference architecture for{" "}<span className={`italic font-serif ${a.emph}`}>{c.name}</span>?</>
-              ) : (
-                <>See how <span className={`italic font-serif ${a.emph}`}>{c.name}</span> fits your stack.</>
-              )}
-            </h3>
-            <p className="mt-3 text-muted-foreground">
-              {c.variant === "diagram"
-                ? "We'll send the diagram and a 30-min walkthrough."
-                : "30 minutes with a senior engineer — we'll tell you what we'd do."}
-            </p>
-          </div>
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30 shrink-0"
-          >
-            {c.variant === "diagram" ? "Request architecture" : "Book discovery"} <ArrowRight className="size-4" />
-          </Link>
+          <Reveal direction="left">
+            <div>
+              <h3 className="text-3xl md:text-4xl font-bold text-foreground leading-tight">
+                {c.variant === "diagram" ? (
+                  <>Want the reference architecture for{" "}<span className={`italic font-serif ${a.emph}`}>{c.name}</span>?</>
+                ) : (
+                  <>See how <span className={`italic font-serif ${a.emph}`}>{c.name}</span> fits your stack.</>
+                )}
+              </h3>
+              <p className="mt-3 text-muted-foreground">
+                {c.variant === "diagram"
+                  ? "We'll send the diagram and a 30-min walkthrough."
+                  : "30 minutes with a senior engineer — we'll tell you what we'd do."}
+              </p>
+            </div>
+          </Reveal>
+          <Reveal direction="right" delay={150} className="shrink-0">
+            <Link
+              href="/contact"
+              className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-4 text-sm font-semibold text-primary-content hover:bg-primary/90 transition-colors shadow-lg shadow-primary/30"
+            >
+              {c.variant === "diagram" ? "Request architecture" : "Book discovery"} <ArrowRight className="size-4" />
+            </Link>
+          </Reveal>
         </div>
       </section>
     </main>
@@ -324,14 +338,16 @@ function HeroDiagram({ c }: { c: SolutionContent }) {
       <div aria-hidden className="pointer-events-none absolute -bottom-40 -left-32 size-[520px] rounded-full bg-secondary/10 blur-3xl" />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         <div>
-          <Crumbs name={c.name} />
-          <HeroHeadline c={c} />
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">{c.lede}</p>
-          <PillRow c={c} />
-          <HeroCTAs variant="diagram" />
+          <Reveal direction="down"><Crumbs name={c.name} /></Reveal>
+          <Reveal direction="left" delay={120}><HeroHeadline c={c} /></Reveal>
+          <Reveal direction="up" delay={260}>
+            <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">{c.lede}</p>
+          </Reveal>
+          <Reveal direction="fade" delay={400}><PillRow c={c} /></Reveal>
+          <Reveal direction="up" delay={520}><HeroCTAs variant="diagram" /></Reveal>
         </div>
 
-        <div className="rounded-3xl border border-base-300 bg-card/80 backdrop-blur p-6 md:p-8">
+        <Reveal direction="right" delay={200} className="rounded-3xl border border-base-300 bg-card/80 backdrop-blur p-6 md:p-8">
           <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground mb-4">
             ↓ reference architecture
           </div>
@@ -369,7 +385,7 @@ function HeroDiagram({ c }: { c: SolutionContent }) {
               </marker>
             </defs>
           </svg>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -383,14 +399,16 @@ function HeroSplit({ c }: { c: SolutionContent }) {
       <div aria-hidden className={`pointer-events-none absolute -top-32 -left-32 size-[460px] rounded-full ${a.glow} blur-3xl`} />
       <div className="relative mx-auto max-w-7xl px-6 py-20 lg:py-24 grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-12 items-center">
         <div>
-          <Crumbs name={c.name} />
-          <HeroHeadline c={c} />
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">{c.lede}</p>
-          <PillRow c={c} />
-          <HeroCTAs variant="split" />
+          <Reveal direction="down"><Crumbs name={c.name} /></Reveal>
+          <Reveal direction="right" delay={120}><HeroHeadline c={c} /></Reveal>
+          <Reveal direction="up" delay={260}>
+            <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">{c.lede}</p>
+          </Reveal>
+          <Reveal direction="fade" delay={400}><PillRow c={c} /></Reveal>
+          <Reveal direction="up" delay={520}><HeroCTAs variant="split" /></Reveal>
         </div>
 
-        <div className="relative aspect-[4/5] lg:aspect-square rounded-3xl overflow-hidden border border-base-300">
+        <Reveal direction="scale" delay={200} className="relative aspect-[4/5] lg:aspect-square rounded-3xl overflow-hidden border border-base-300">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={c.heroImage} alt={c.name} className="absolute inset-0 size-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-tr from-background/80 via-background/10 to-transparent" />
@@ -398,7 +416,7 @@ function HeroSplit({ c }: { c: SolutionContent }) {
             <span>{c.name}</span>
             <span className="text-primary">Intrastack</span>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -417,15 +435,19 @@ function HeroOverlay({ c }: { c: SolutionContent }) {
 
       <div className="relative mx-auto max-w-7xl px-6 py-24 lg:py-32 grid grid-cols-1 lg:grid-cols-[3fr_2fr] gap-12 items-center">
         <div>
-          <Crumbs name={c.name} />
-          <h1 className="mt-5 text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
-            {c.headline.lead}{" "}
-            <span className={`italic font-serif ${a.emph}`}>{c.headline.emph}</span>{" "}
-            {c.headline.tail}
-          </h1>
-          <p className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
-          <PillRow c={c} />
-          <HeroCTAs variant="overlay" />
+          <Reveal direction="down"><Crumbs name={c.name} /></Reveal>
+          <Reveal direction="scale" delay={120}>
+            <h1 className="mt-5 text-5xl md:text-7xl font-bold text-foreground leading-[1.02] tracking-tight">
+              {c.headline.lead}{" "}
+              <span className={`italic font-serif ${a.emph}`}>{c.headline.emph}</span>{" "}
+              {c.headline.tail}
+            </h1>
+          </Reveal>
+          <Reveal direction="left" delay={280}>
+            <p className="mt-7 max-w-2xl text-lg text-muted-foreground leading-relaxed">{c.lede}</p>
+          </Reveal>
+          <Reveal direction="fade" delay={420}><PillRow c={c} /></Reveal>
+          <Reveal direction="up" delay={540}><HeroCTAs variant="overlay" /></Reveal>
         </div>
       </div>
     </section>
